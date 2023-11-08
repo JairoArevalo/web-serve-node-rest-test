@@ -18,4 +18,6 @@ usuarioSchema.methods.toJSON = function () {
 }
 
 
+usuarioSchema.options.strictPopulate = false;
+
 export default model('Usuarios', usuarioSchema);
