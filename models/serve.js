@@ -8,17 +8,19 @@ const port = process.env.PORT;
 import "dotenv/config";
 import { routerCategorias } from "../routes/categorias.routes.js";
 import { routerProductos } from "../routes/productos.routes.js";
+import { routerBusquedas } from "../routes/buscar.routes.js";
 
 class Server {
     constructor() {
         this.app = express();
         this.port = port;
-        this.usuariosApi        =  `/api/usuarios`;
-        this.authRoute          =  `/api/auth`
-        this.categoriasRoute    =  `/api/categorias`
-        this.productosRoute    =  `/api/productos`
-        // conectar a base de datos
-        this.conectarDB();
+        this.usuariosApi = `/api/usuarios`;
+        this.authRoute = `/api/auth`
+        this.categoriasRoute = `/api/categorias`
+        this.productosRoute = `/api/productos`
+        this.busquedaRoute = `/api/busqueda`
+            // conectar a base de datos
+            this.conectarDB();
 
         //Middleware
         this.middlewares();
@@ -47,10 +49,11 @@ class Server {
     routes() {
 
         //Rutas usuarios
-        this.app.use( `${this.authRoute}`, routerAuth);
-        this.app.use( `${this.usuariosApi}`, router);
-        this.app.use( `${this.categoriasRoute}`, routerCategorias);
-        this.app.use( `${this.productosRoute}`, routerProductos);
+        this.app.use(`${this.authRoute}`, routerAuth);
+        this.app.use(`${this.usuariosApi}`, router);
+        this.app.use(`${this.categoriasRoute}`, routerCategorias);
+        this.app.use(`${this.productosRoute}`, routerProductos);
+        this.app.use(`${this.busquedaRoute}`, routerBusquedas);
 
 
     }
