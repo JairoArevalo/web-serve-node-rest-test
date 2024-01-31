@@ -9,6 +9,8 @@ import "dotenv/config";
 import { routerCategorias } from "../routes/categorias.routes.js";
 import { routerProductos } from "../routes/productos.routes.js";
 import { routerBusquedas } from "../routes/buscar.routes.js";
+import { routerUpload } from "../routes/uploads.routes.js";
+import fileUpload from "express-fileupload";
 
 class Server {
     constructor() {
@@ -19,8 +21,9 @@ class Server {
         this.categoriasRoute = `/api/categorias`
         this.productosRoute = `/api/productos`
         this.busquedaRoute = `/api/busqueda`
-            // conectar a base de datos
-            this.conectarDB();
+        this.uploadRoute = `/api/upload`
+        // conectar a base de datos
+        this.conectarDB();
 
         //Middleware
         this.middlewares();
@@ -44,6 +47,13 @@ class Server {
 
         //Directorio publico
         this.app.use(express.static('public'));
+
+        //Carga de archivos
+        this.app.use(fileUpload({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
+            createParentPath: true
+        }));
     }
 
     routes() {
@@ -54,6 +64,8 @@ class Server {
         this.app.use(`${this.categoriasRoute}`, routerCategorias);
         this.app.use(`${this.productosRoute}`, routerProductos);
         this.app.use(`${this.busquedaRoute}`, routerBusquedas);
+        this.app.use(`${this.uploadRoute}`, routerUpload);
+
 
 
     }

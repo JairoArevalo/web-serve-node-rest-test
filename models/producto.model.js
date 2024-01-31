@@ -10,7 +10,8 @@ const ProductosSchema = Schema({
     createdAt: { type: Date, default: Date.now() },
     updatedAt: { type: Date, default: Date.now() },
     description: { type: String, default: '' },
-    disponible: {type: Boolean, default: true}
+    disponible: {type: Boolean, default: true},
+    img: {type: String}
 
 });
 

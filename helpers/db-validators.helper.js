@@ -27,5 +27,15 @@ const existeUsuarioPorId = async (idUsario = '') => {
 }
 
 
+const validarColeccionesPermitidas =  (coleccion = '', colecciones = []) => {
+    const incluida = colecciones.includes( coleccion );
+    if (!incluida) {
+        throw new Error(`La coleccion ${coleccion}, no es permitida deberia ser ${colecciones}`);
+    }
 
-export { esRolValido, existeEmail, existeUsuarioPorId };
+    return true;
+
+}
+
+
+export { esRolValido, existeEmail, existeUsuarioPorId, validarColeccionesPermitidas };
